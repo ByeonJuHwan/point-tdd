@@ -1,9 +1,7 @@
 package io.hhplus.tdd.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.hhplus.tdd.application.PointReadService
 import io.hhplus.tdd.application.PointService
-import io.hhplus.tdd.application.PointWriteService
 import io.hhplus.tdd.point.PointHistory
 import io.hhplus.tdd.point.TransactionType
 import io.hhplus.tdd.point.UserPoint
@@ -28,13 +26,6 @@ class PointControllerTest @Autowired constructor(
     private val mockMvc: MockMvc,
     private val objectMapper: ObjectMapper,
 ) {
-
-    @MockBean
-    private lateinit var pointReadService: PointReadService
-
-    @MockBean
-    private lateinit var pointWriteService: PointWriteService
-
     @MockBean
     private lateinit var pointService: PointService
 
@@ -48,7 +39,7 @@ class PointControllerTest @Autowired constructor(
         val userPoint = UserPoint(userId, 0,0)
 
 
-        given(pointReadService.getUserPointById(userId)).willReturn(userPoint)
+        given(pointService.getUserPointById(userId)).willReturn(userPoint)
 
         mockMvc.perform(get("/point/{id}", userId))
             .andExpect(status().isOk)
@@ -84,7 +75,7 @@ class PointControllerTest @Autowired constructor(
         val amount = 100L
         val userPoint = UserPoint(userId, amount, System.currentTimeMillis())
 
-        given(pointWriteService.chargeUserPoint(userId, amount)).willReturn(userPoint)
+        given(pointService.chargeUserPoint(userId, amount)).willReturn(userPoint)
 
         mockMvc.perform(patch("/point/{id}/charge", userId)
             .contentType(MediaType.APPLICATION_JSON)
