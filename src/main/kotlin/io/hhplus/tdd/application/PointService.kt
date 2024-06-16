@@ -13,12 +13,14 @@ class PointService(
         return point.getUserPointById(userId)
     }
 
+    @Synchronized
     fun chargeUserPoint(userId: Long, amount: Long): UserPoint {
         validateAmount(amount)
         val currentUserPoint = getUserPointById(userId)
         return updateUserPointForCharge(userId, amount, currentUserPoint)
     }
 
+    @Synchronized
     fun useUserPoint(userId: Long, amount: Long): UserPoint {
         validateAmount(amount)
         val currentUserPoint = getUserPointById(userId)

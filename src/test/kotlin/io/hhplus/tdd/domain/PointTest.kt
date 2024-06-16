@@ -12,6 +12,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 
+// TODO 나머지 테스트 작성
 @ExtendWith(MockitoExtension::class)
 class PointTest {
 
