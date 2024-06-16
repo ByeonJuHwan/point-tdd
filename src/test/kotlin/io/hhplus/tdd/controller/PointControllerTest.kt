@@ -49,6 +49,9 @@ class PointControllerTest @Autowired constructor(
             .andExpect(jsonPath("$.updateMillis").value(0))
     }
 
+    /**
+     * userId 를 받으면 해당 유저가 사용한 포인트 내역을 조회한다.
+     */
     @Test
     fun `getUserPointHistoryAPI Test 200 Ok`() {
         val userId = 1L
@@ -56,14 +59,16 @@ class PointControllerTest @Autowired constructor(
             PointHistory(1, userId, TransactionType.CHARGE, 100, 0),
             PointHistory(2, userId, TransactionType.USE, 10, 0)
         )
-        //TODO service 단이 들어와야함
+
+        given(pointService.getUserPointHistories(userId)).willReturn(histories)
+
         mockMvc.perform(get("/point/{id}/histories", userId))
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()").value(0))
-
-        //TODO 요소가 추가되면 요소에 대한 테스트도 작성이 되야함
-
+            .andExpect(jsonPath("$.length()").value(2))
+            .andExpect(jsonPath("$[0].userId").value(userId))
+            .andExpect(jsonPath("$[0].type").value(TransactionType.CHARGE.toString()))
+            .andExpect(jsonPath("$[0].amount").value(100))
     }
 
     /**
@@ -87,7 +92,24 @@ class PointControllerTest @Autowired constructor(
             .andExpect(jsonPath("$.updateMillis").value(userPoint.updateMillis))
     }
 
+    /**
+     *  userId 와 amount (사용할 포인트양) 을 받으면 포인트를 감소시킨다.
+     */
     @Test
     fun `userUserPointAPI Test 200 ok`() {
+        val userId = 1L
+        val amount = 50L
+        val userPoint = UserPoint(userId, amount, System.currentTimeMillis())
+
+        given(pointService.useUserPoint(userId,amount)).willReturn(userPoint)
+
+        mockMvc.perform(patch("/point/{id}/use", userId)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(amount)))
+            .andExpect(status().isOk)
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value(userId))
+            .andExpect(jsonPath("$.point").value(amount))
+            .andExpect(jsonPath("$.updateMillis").value(userPoint.updateMillis))
     }
 }
