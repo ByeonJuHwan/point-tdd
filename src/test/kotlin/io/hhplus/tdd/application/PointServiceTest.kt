@@ -1,6 +1,7 @@
 package io.hhplus.tdd.application
 
 import io.hhplus.tdd.domain.Point
+import io.hhplus.tdd.exception.NotEnoughPointException
 import io.hhplus.tdd.point.PointHistory
 import io.hhplus.tdd.point.TransactionType
 import io.hhplus.tdd.point.UserPoint
@@ -114,7 +115,7 @@ class PointServiceTest {
         }
 
         @Test
-        fun `포인트 잔액이 0일때 포인트 사용 요청이 들어오면 예외를 발생 시킨다`() {
+        fun `포인트 잔액이 부족할때 포인트 사용 요청이 들어오면 예외(NotEnoughPointException)를 발생 시킨다`() {
             val userId = 1L
             val amount = 100L
             val initialUserPoint = UserPoint(id = userId, point = 0, updateMillis = System.currentTimeMillis())
@@ -123,7 +124,7 @@ class PointServiceTest {
 
             assertThatThrownBy {
                 pointService.useUserPoint(userId, amount)
-            }.isInstanceOf(IllegalArgumentException::class.java)
+            }.isInstanceOf(NotEnoughPointException::class.java)
                 .hasMessage("사용 가능한 포인트가 부족합니다")
         }
     }

@@ -1,5 +1,6 @@
 package io.hhplus.tdd
 
+import io.hhplus.tdd.exception.NotEnoughPointException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -18,6 +19,14 @@ class ApiControllerAdvice : ResponseEntityExceptionHandler() {
     fun handleIllegalArgumentException(e: IllegalArgumentException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(
             ErrorResponse("400", e.message ?: "잘못된 요청입니다."),
+            HttpStatus.BAD_REQUEST
+        )
+    }
+
+    @ExceptionHandler(NotEnoughPointException::class)
+    fun handleIllegalArgumentException(e: NotEnoughPointException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity(
+            ErrorResponse("400", e.message ?: "사용 가능한 포인트가 부족합니다"),
             HttpStatus.BAD_REQUEST
         )
     }

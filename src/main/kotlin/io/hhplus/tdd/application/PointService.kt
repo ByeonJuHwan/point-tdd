@@ -1,6 +1,7 @@
 package io.hhplus.tdd.application
 
 import io.hhplus.tdd.domain.Point
+import io.hhplus.tdd.exception.NotEnoughPointException
 import io.hhplus.tdd.point.PointHistory
 import io.hhplus.tdd.point.UserPoint
 import org.springframework.stereotype.Service
@@ -38,7 +39,7 @@ class PointService(
     }
 
     private fun validateSufficientPoints(userPointById: UserPoint, amount: Long) {
-        if (userPointById.point < amount) throw IllegalArgumentException("사용 가능한 포인트가 부족합니다")
+        if (userPointById.point < amount) throw NotEnoughPointException("사용 가능한 포인트가 부족합니다")
     }
 
     private fun updateUserPointForCharge(userId: Long, amount: Long, currentUserPoint: UserPoint): UserPoint {
