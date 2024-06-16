@@ -1,6 +1,7 @@
 package io.hhplus.tdd.domain
 
 import io.hhplus.tdd.infra.PointRepository
+import io.hhplus.tdd.point.PointHistory
 import io.hhplus.tdd.point.UserPoint
 import org.springframework.stereotype.Service
 
@@ -12,11 +13,15 @@ class Point(
         return pointRepository.findById(userId)
     }
 
-    fun chargePoint(userId: Long, amount: Long): UserPoint {
-        return pointRepository.chargeUserPoint(userId, amount)
+    fun getUserPointHistories(userId: Long): List<PointHistory> {
+        return pointRepository.getUserPointHistories(userId)
     }
 
-    fun useUserPoint(userId: Long, amount: Long): UserPoint {
-        return pointRepository.userUserPoint(userId, amount)
+    fun chargePoint(userId: Long, amount: Long, totalPointsAfterCharge : Long): UserPoint {
+        return pointRepository.chargeUserPoint(userId, amount, totalPointsAfterCharge)
+    }
+
+    fun useUserPoint(userId: Long, amount : Long ,remainingPoints: Long): UserPoint {
+        return pointRepository.userUserPoint(userId, amount, remainingPoints)
     }
 }

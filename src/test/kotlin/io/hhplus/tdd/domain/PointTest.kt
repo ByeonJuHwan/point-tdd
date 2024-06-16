@@ -30,11 +30,12 @@ class PointTest {
         // given
         val userId = 1L
         val amount = 100L
+        val totalPointsAfterCharge = 100L
         val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis())
 
         // when
-        `when`(pointRepository.chargeUserPoint(userId = userId, amount = amount)).thenReturn(userPoint)
-        val result = pointRepository.chargeUserPoint(userId,amount)
+        `when`(pointRepository.chargeUserPoint(userId = userId, amount = amount, totalPointsAfterCharge = totalPointsAfterCharge)).thenReturn(userPoint)
+        val result = pointRepository.chargeUserPoint(userId, amount, totalPointsAfterCharge)
 
         // then
         Assertions.assertThat(result).isEqualTo(userPoint)
