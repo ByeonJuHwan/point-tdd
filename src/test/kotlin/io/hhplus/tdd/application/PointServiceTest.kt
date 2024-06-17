@@ -31,7 +31,7 @@ class PointServiceTest {
 
     /**
      * 사용자의 포인트 데이터를 domain layer 에서 받아온다.
-     */
+     */ 
     @Nested
     @DisplayName("[조회] 회원별 포인트 조회 서비스")
     inner class GetUserPointTests {
