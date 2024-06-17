@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
@@ -32,6 +33,7 @@ class PointServiceTest {
      * 사용자의 포인트 데이터를 domain layer 에서 받아온다.
      */
     @Nested
+    @DisplayName("[조회] 회원별 포인트 조회 서비스")
     inner class GetUserPointTests {
 
         @Test
@@ -50,6 +52,7 @@ class PointServiceTest {
     }
 
     @Nested
+    @DisplayName("[저장] 회원별 포인트 저장 서비스")
     inner class ChargeUserPointTests {
 
         @Test
@@ -83,6 +86,7 @@ class PointServiceTest {
     }
 
     @Nested
+    @DisplayName("[사용] 회원별 포인트 사용 서비스")
     inner class UseUserPointTests {
 
         @Test
@@ -130,6 +134,7 @@ class PointServiceTest {
     }
 
     @Nested
+    @DisplayName("[조회] 회원별 포인트 사용내역 조회 서비스")
     inner class GetUserPointHistoriesTests {
 
         @Test
