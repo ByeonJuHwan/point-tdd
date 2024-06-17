@@ -22,6 +22,6 @@ class Point(
     }
 
     fun useUserPoint(userId: Long, amount : Long ,remainingPoints: Long): UserPoint {
-        return pointRepository.userUserPoint(userId, amount, remainingPoints)
+        return pointRepository.useUserPoint(userId, amount, remainingPoints)
     }
 }
