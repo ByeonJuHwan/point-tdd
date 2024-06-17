@@ -32,6 +32,9 @@ class PointControllerTest @Autowired constructor(
     private lateinit var pointService: PointService
 
 
+    /**
+     * 유저 포인트 조회 테스트
+     */
     @Nested
     @DisplayName("[조회] 유저 포인트 조회 컨트롤러 테스트")
     inner class GetUserPointControllerTests{

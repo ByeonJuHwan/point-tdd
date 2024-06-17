@@ -17,6 +17,7 @@ class PointController(
     /**
      * TODO - 특정 유저의 포인트를 조회하는 기능을 작성해주세요.
      */
+    // 유저 포인트 조회
     @GetMapping("{id}")
     fun point(
         @PathVariable id: Long,
