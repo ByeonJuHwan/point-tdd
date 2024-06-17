@@ -31,7 +31,7 @@ class PointControllerTest @Autowired constructor(
     @MockBean
     private lateinit var pointService: PointService
 
-
+    // 유저 포인트 테스트
     @Nested
     @DisplayName("[조회] 유저 포인트 조회 컨트롤러 테스트")
     inner class GetUserPointControllerTests{
@@ -65,6 +65,7 @@ class PointControllerTest @Autowired constructor(
                 .andExpect(status().isBadRequest)
         }
     }
+    // 유저 포인트 테스트 끝
 
 
     @Nested
