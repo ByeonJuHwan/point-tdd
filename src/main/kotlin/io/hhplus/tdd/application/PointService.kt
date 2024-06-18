@@ -14,20 +14,20 @@ class PointService(
         return point.getUserPointById(userId)
     }
 
-    @Synchronized
-    fun chargeUserPoint(userId: Long, amount: Long): UserPoint {
-        validateAmount(amount)
-        val currentUserPoint = getUserPointById(userId)
-        return updateUserPointForCharge(userId, amount, currentUserPoint)
-    }
-
-    @Synchronized
-    fun useUserPoint(userId: Long, amount: Long): UserPoint {
-        validateAmount(amount)
-        val currentUserPoint = getUserPointById(userId)
-        validateSufficientPoints(currentUserPoint, amount)
-        return updateUserPointForUse(userId, amount, currentUserPoint)
-    }
+    @Synchronized 
+    fun chargeUserPoint(userId: Long, amount: Long): UserPoint { 
+        validateAmount(amount) 
+        val currentUserPoint = getUserPointById(userId) 
+        return updateUserPointForCharge(userId, amount, currentUserPoint) 
+    } 
+ 
+    @Synchronized 
+    fun useUserPoint(userId: Long, amount: Long): UserPoint { 
+        validateAmount(amount) 
+        val currentUserPoint = getUserPointById(userId) 
+        validateSufficientPoints(currentUserPoint, amount) 
+        return updateUserPointForUse(userId, amount, currentUserPoint) 
+    } 
 
     fun getUserPointHistories(userId: Long): List<PointHistory> {
         return point.getUserPointHistories(userId)
