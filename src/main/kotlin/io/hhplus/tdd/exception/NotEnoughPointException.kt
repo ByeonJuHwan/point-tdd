@@ -1,3 +1,3 @@
 package io.hhplus.tdd.exception
 
-class NotEnoughPointException(message: String) : RuntimeException(message)
+class NotEnoughPointException(message: String) : RuntimeException(message) 
