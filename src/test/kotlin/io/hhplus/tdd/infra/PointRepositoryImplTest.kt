@@ -31,16 +31,16 @@ class PointRepositoryImplTest {
     @Mock
     lateinit var userPointTable: UserPointTable
 
-    @Test
-    fun `특정 유저의 id를 받으면 userPointTable 에서 해당 유저의 포인트 정보를 반환한다`() {
-        val userId = 1L
-        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis())
-
-        `when`(userPointTable.selectById(userId)).thenReturn(userPoint)
-        val result = userPointTable.selectById(userId)
-
-        assertThat(result).isEqualTo(userPoint)
-    }
+    @Test 
+    fun `특정 유저의 id를 받으면 userPointTable 에서 해당 유저의 포인트 정보를 반환한다`() { 
+        val userId = 1L 
+        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis()) 
+ 
+        `when`(userPointTable.selectById(userId)).thenReturn(userPoint) 
+        val result = userPointTable.selectById(userId) 
+ 
+        assertThat(result).isEqualTo(userPoint) 
+    } 
 
     @Test
     fun `특정 유저의 id를 받으면 pointHistoryTable 에서 해당 유저의 포인트 사용 내역 리스트를 반환한다`() {
