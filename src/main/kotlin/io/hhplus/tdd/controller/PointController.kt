@@ -31,15 +31,15 @@ class PointController(
     ): List<PointHistory> = pointService.getUserPointHistories(id) 
  
 
-    /**
-     * TODO - 특정 유저의 포인트를 충전하는 기능을 작성해주세요.
-     */
-    @PatchMapping("{id}/charge")
-    fun charge(
-        @PathVariable id: Long,
-        @RequestBody amount: Long,
-    ): UserPoint = pointService.chargeUserPoint(id, amount)
-
+    /** 
+     * TODO - 특정 유저의 포인트를 충전하는 기능을 작성해주세요. 
+     */  
+    @PatchMapping("{id}/charge") 
+    fun charge( 
+        @PathVariable id: Long, 
+        @RequestBody amount: Long, 
+    ): UserPoint = pointService.chargeUserPoint(id, amount) 
+ 
 
     /**
      * TODO - 특정 유저의 포인트를 사용하는 기능을 작성해주세요.

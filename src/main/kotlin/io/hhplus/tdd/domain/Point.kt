@@ -16,11 +16,11 @@ class Point(
     fun getUserPointHistories(userId: Long): List<PointHistory> {
         return pointRepository.getUserPointHistories(userId)
     }
-
-    fun chargePoint(userId: Long, amount: Long, totalPointsAfterCharge : Long): UserPoint {
-        return pointRepository.chargeUserPoint(userId, amount, totalPointsAfterCharge)
-    }
-
+ 
+    fun chargePoint(userId: Long, amount: Long, totalPointsAfterCharge : Long): UserPoint { 
+        return pointRepository.chargeUserPoint(userId, amount, totalPointsAfterCharge) 
+    } 
+ 
     fun useUserPoint(userId: Long, amount : Long ,remainingPoints: Long): UserPoint {
         return pointRepository.useUserPoint(userId, amount, remainingPoints)
     }

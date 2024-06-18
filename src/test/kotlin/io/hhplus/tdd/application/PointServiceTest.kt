@@ -51,40 +51,40 @@ class PointServiceTest {
         }
     }
 
-    @Nested
-    @DisplayName("[저장] 회원별 포인트 저장 서비스")
-    inner class ChargeUserPointTests {
-
-        @Test
-        fun `특정 유저의 아이디와 저장할 포인트를 받으면 domain 레이어에서 저장된 값을 받아온다`() {
-            // given
-            val userId = 1L
-            val amount = 100L
-            val initialUserPoint = UserPoint(id = userId, point = 1000L, updateMillis = System.currentTimeMillis())
-            val userPoint = UserPoint(id = userId, point = 1100L, updateMillis = System.currentTimeMillis())
-            val totalPointsAfterCharge = initialUserPoint.point + amount
-
-            // when
-            `when`(pointService.getUserPointById(userId)).thenReturn(initialUserPoint)
-            `when`(point.chargePoint(userId = userId, amount = amount, totalPointsAfterCharge = totalPointsAfterCharge)).thenReturn(userPoint)
-            val result = pointService.chargeUserPoint(userId, amount)
-
-            // then
-            assertThat(result).isEqualTo(userPoint)
-        }
-
-        @Test
-        fun `저장하려는 포인트가 0보다 작은수가 전달되면 예외(IllegalArgumentException)를 발생 시킨다`() {
-            val userId = 1L
-            val amount = -100L
-
-            assertThatThrownBy {
-                pointService.chargeUserPoint(userId, amount)
-            }.isInstanceOf(IllegalArgumentException::class.java)
-                .hasMessage("포인트는 0 이하일 수 없습니다")
-        }
-    }
-
+    @Nested 
+    @DisplayName("[저장] 회원별 포인트 저장 서비스") 
+    inner class ChargeUserPointTests { 
+ 
+        @Test 
+        fun `특정 유저의 아이디와 저장할 포인트를 받으면 domain 레이어에서 저장된 값을 받아온다`() { 
+            // given 
+            val userId = 1L 
+            val amount = 100L 
+            val initialUserPoint = UserPoint(id = userId, point = 1000L, updateMillis = System.currentTimeMillis()) 
+            val userPoint = UserPoint(id = userId, point = 1100L, updateMillis = System.currentTimeMillis()) 
+            val totalPointsAfterCharge = initialUserPoint.point + amount 
+ 
+            // when 
+            `when`(pointService.getUserPointById(userId)).thenReturn(initialUserPoint) 
+            `when`(point.chargePoint(userId = userId, amount = amount, totalPointsAfterCharge = totalPointsAfterCharge)).thenReturn(userPoint) 
+            val result = pointService.chargeUserPoint(userId, amount) 
+ 
+            // then 
+            assertThat(result).isEqualTo(userPoint) 
+        } 
+ 
+        @Test 
+        fun `저장하려는 포인트가 0보다 작은수가 전달되면 예외(IllegalArgumentException)를 발생 시킨다`() { 
+            val userId = 1L 
+            val amount = -100L 
+ 
+            assertThatThrownBy { 
+                pointService.chargeUserPoint(userId, amount) 
+            }.isInstanceOf(IllegalArgumentException::class.java) 
+                .hasMessage("포인트는 0 이하일 수 없습니다") 
+        } 
+    } 
+ 
     @Nested
     @DisplayName("[사용] 회원별 포인트 사용 서비스")
     inner class UseUserPointTests {

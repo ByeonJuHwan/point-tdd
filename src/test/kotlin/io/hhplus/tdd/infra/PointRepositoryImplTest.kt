@@ -57,19 +57,19 @@ class PointRepositoryImplTest {
         assertThat(result[0].amount).isEqualTo(100)
         assertThat(result[1].amount).isEqualTo(10)
     }
-
-    @Test
-    fun `id, amount, totalPointsAfterCharge 를 전달 받고 테이블에서 포인트를 저장 후 저장 값을 반환해 준다`() {
-        val userId = 1L
-        val amount = 100L
-        val totalPointsAfterCharge = 100L
-        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis())
-
-        `when`(userPointTable.insertOrUpdate(userId, totalPointsAfterCharge)).thenReturn(userPoint)
-        val result = pointRepositoryImpl.chargeUserPoint(userId, amount, totalPointsAfterCharge)
-
-        assertThat(userPoint).isEqualTo(result)
-    }
+ 
+    @Test 
+    fun `id, amount, totalPointsAfterCharge 를 전달 받고 테이블에서 포인트를 저장 후 저장 값을 반환해 준다`() { 
+        val userId = 1L 
+        val amount = 100L 
+        val totalPointsAfterCharge = 100L 
+        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis()) 
+ 
+        `when`(userPointTable.insertOrUpdate(userId, totalPointsAfterCharge)).thenReturn(userPoint) 
+        val result = pointRepositoryImpl.chargeUserPoint(userId, amount, totalPointsAfterCharge) 
+ 
+        assertThat(userPoint).isEqualTo(result) 
+    } 
 
     @Test
     fun `id, amount, remainingPoints 를 전달 받고 사용하고 남은 포인트를 테이블에 저장 후 저장 값을 반환해 준다 `() {
@@ -83,20 +83,20 @@ class PointRepositoryImplTest {
 
         assertThat(userPoint).isEqualTo(result)
     }
-
-    @Test
-    fun `포인트를 충전 시 history 가 저장된다`() {
-        val userId = 1L
-        val amount = 100L
-        val totalPointsAfterCharge = 100L
-        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis())
-
-        `when`(userPointTable.insertOrUpdate(userId, totalPointsAfterCharge)).thenReturn(userPoint)
-
-        pointRepositoryImpl.chargeUserPoint(userId, amount, totalPointsAfterCharge)
-
-        verify(pointHistoryStorage, times(1)).savePointHistory(userId, amount, TransactionType.CHARGE)
-    }
+ 
+    @Test 
+    fun `포인트를 충전 시 history 가 저장된다`() { 
+        val userId = 1L 
+        val amount = 100L 
+        val totalPointsAfterCharge = 100L 
+        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis()) 
+ 
+        `when`(userPointTable.insertOrUpdate(userId, totalPointsAfterCharge)).thenReturn(userPoint) 
+ 
+        pointRepositoryImpl.chargeUserPoint(userId, amount, totalPointsAfterCharge) 
+ 
+        verify(pointHistoryStorage, times(1)).savePointHistory(userId, amount, TransactionType.CHARGE) 
+    } 
 
     @Test
     fun `포인트를 사용 시 history 가 저장된다`() {
