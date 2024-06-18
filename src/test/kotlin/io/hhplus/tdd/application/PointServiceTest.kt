@@ -133,26 +133,26 @@ class PointServiceTest {
         }
     }
 
-    @Nested
-    @DisplayName("[조회] 회원별 포인트 사용내역 조회 서비스")
-    inner class GetUserPointHistoriesTests {
-
-        @Test
-        fun `특정 유저의 포인트 사용 내역을 조회한다`() {
-            // given
-            val userId = 1L
-            val histories = listOf(
-                PointHistory(1, userId, TransactionType.CHARGE, 100, 0),
-                PointHistory(2, userId, TransactionType.USE, 10, 0)
-            )
-
-            // when
-            `when`(point.getUserPointHistories(userId)).thenReturn(histories)
-            val result = pointService.getUserPointHistories(userId)
-
-            // then
-            assertThat(result).isEqualTo(histories)
-            assertThat(result).hasSize(2)
-        }
-    }
+    @Nested 
+    @DisplayName("[조회] 회원별 포인트 사용내역 조회 서비스") 
+    inner class GetUserPointHistoriesTests { 
+ 
+        @Test 
+        fun `특정 유저의 포인트 사용 내역을 조회한다`() { 
+            // given 
+            val userId = 1L 
+            val histories = listOf( 
+                PointHistory(1, userId, TransactionType.CHARGE, 100, 0), 
+                PointHistory(2, userId, TransactionType.USE, 10, 0) 
+            ) 
+ 
+            // when 
+            `when`(point.getUserPointHistories(userId)).thenReturn(histories) 
+            val result = pointService.getUserPointHistories(userId) 
+ 
+            // then 
+            assertThat(result).isEqualTo(histories) 
+            assertThat(result).hasSize(2) 
+        } 
+    } 
 }
