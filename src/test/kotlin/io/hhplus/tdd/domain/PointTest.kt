@@ -34,22 +34,22 @@ class PointTest {
 
         assertThat(result).isEqualTo(userPoint)
     }
-
-    @Test
-    fun `특정 유저의 id를 받아서 infra layer 로 부터 유저의 포인트 사용 내역을 받아온다`() {
-        val userId = 1L
-        val histories = listOf(
-            PointHistory(1, userId, TransactionType.CHARGE, 100, 0),
-            PointHistory(2, userId, TransactionType.USE, 10, 0)
-        )
-
-        `when`(pointRepository.getUserPointHistories(userId)).thenReturn(histories)
-        val result = point.getUserPointHistories(userId)
-
-        assertThat(histories).hasSize(2)
-        assertThat(histories[0].amount).isEqualTo(100)
-        assertThat(histories[1].amount).isEqualTo(10)
-    }
+ 
+    @Test 
+    fun `특정 유저의 id를 받아서 infra layer 로 부터 유저의 포인트 사용 내역을 받아온다`() { 
+        val userId = 1L 
+        val histories = listOf( 
+            PointHistory(1, userId, TransactionType.CHARGE, 100, 0), 
+            PointHistory(2, userId, TransactionType.USE, 10, 0) 
+        ) 
+ 
+        `when`(pointRepository.getUserPointHistories(userId)).thenReturn(histories) 
+        val result = point.getUserPointHistories(userId) 
+ 
+        assertThat(histories).hasSize(2) 
+        assertThat(histories[0].amount).isEqualTo(100) 
+        assertThat(histories[1].amount).isEqualTo(10) 
+    } 
 
     @Test
     fun `특정 유저의 저장할 포인트를 받아서 infra layer 로 전달하고 저장된 포인트를 받아온다`() {
