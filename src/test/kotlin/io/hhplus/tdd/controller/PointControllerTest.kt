@@ -31,41 +31,41 @@ class PointControllerTest @Autowired constructor(
     @MockBean
     private lateinit var pointService: PointService
 
-
-    @Nested
-    @DisplayName("[조회] 유저 포인트 조회 컨트롤러 테스트")
-    inner class GetUserPointControllerTests{
-        /**
-         * userId 를 요청 받으면 200 응답과 함께 UserPoint 정보를 내려준다.
-         */
-        @Test
-        fun `getUserPointAPI Test 200 ok`() {
-            val userId = 1L
-            val userPoint = UserPoint(userId, 0,0)
-
-
-            given(pointService.getUserPointById(userId)).willReturn(userPoint)
-
-            mockMvc.perform(get("/point/{id}", userId))
-                .andExpect(status().isOk)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(userId))
-                .andExpect(jsonPath("$.point").value(0))
-                .andExpect(jsonPath("$.updateMillis").value(0))
-        }
-
-        /**
-         * 유효하지 않은 Id가 들어오면 400 에러를 반환한다.
-         */
-        @Test
-        fun `getUserPointAPI Test 400 Bad Request`() {
-            val invalidUserId = "invalid"
-
-            mockMvc.perform(get("/point/{id}", invalidUserId))
-                .andExpect(status().isBadRequest)
-        }
-    }
-
+ 
+    @Nested 
+    @DisplayName("[조회] 유저 포인트 조회 컨트롤러 테스트") 
+    inner class GetUserPointControllerTests{ 
+        /** 
+         * userId 를 요청 받으면 200 응답과 함께 UserPoint 정보를 내려준다. 
+         */ 
+        @Test 
+        fun `getUserPointAPI Test 200 ok`() { 
+            val userId = 1L 
+            val userPoint = UserPoint(userId, 0,0) 
+ 
+ 
+            given(pointService.getUserPointById(userId)).willReturn(userPoint) 
+ 
+            mockMvc.perform(get("/point/{id}", userId)) 
+                .andExpect(status().isOk)  
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON)) 
+                .andExpect(jsonPath("$.id").value(userId)) 
+                .andExpect(jsonPath("$.point").value(0)) 
+                .andExpect(jsonPath("$.updateMillis").value(0)) 
+        } 
+ 
+        /** 
+         * 유효하지 않은 Id가 들어오면 400 에러를 반환한다. 
+         */ 
+        @Test 
+        fun `getUserPointAPI Test 400 Bad Request`() { 
+            val invalidUserId = "invalid" 
+ 
+            mockMvc.perform(get("/point/{id}", invalidUserId)) 
+                .andExpect(status().isBadRequest) 
+        } 
+    } 
+ 
 
     @Nested
     @DisplayName("[조회] 유저 포인트 사용 내역을 조회 컨트롤러 테스트")
