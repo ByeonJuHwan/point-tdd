@@ -12,11 +12,11 @@ class Point(
     fun getUserPointById(userId: Long): UserPoint{
         return pointRepository.findById(userId)
     }
-
-    fun getUserPointHistories(userId: Long): List<PointHistory> {
-        return pointRepository.getUserPointHistories(userId)
-    }
-
+ 
+    fun getUserPointHistories(userId: Long): List<PointHistory> { 
+        return pointRepository.getUserPointHistories(userId) 
+    } 
+ 
     fun chargePoint(userId: Long, amount: Long, totalPointsAfterCharge : Long): UserPoint {
         return pointRepository.chargeUserPoint(userId, amount, totalPointsAfterCharge)
     }

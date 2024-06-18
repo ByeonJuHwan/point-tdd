@@ -7,5 +7,5 @@ interface PointRepository {
     fun findById(userId: Long): UserPoint
     fun chargeUserPoint(userId: Long, amount: Long, totalPointsAfterCharge: Long): UserPoint
     fun useUserPoint(userId: Long, amount: Long, remainingPoints : Long): UserPoint
-    fun getUserPointHistories(userId: Long): List<PointHistory>
+    fun getUserPointHistories(userId: Long): List<PointHistory> 
 }

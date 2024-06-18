@@ -41,23 +41,23 @@ class PointRepositoryImplTest {
 
         assertThat(result).isEqualTo(userPoint)
     }
-
-    @Test
-    fun `특정 유저의 id를 받으면 pointHistoryTable 에서 해당 유저의 포인트 사용 내역 리스트를 반환한다`() {
-        val userId = 1L
-        val histories = listOf(
-            PointHistory(1, userId, TransactionType.CHARGE, 100, 0),
-            PointHistory(2, userId, TransactionType.USE, 10, 0)
-        )
-
-        `when`(pointHistoryTable.selectAllByUserId(userId)).thenReturn(histories)
-        val result = pointRepositoryImpl.getUserPointHistories(userId)
-
-        assertThat(result).hasSize(2)
-        assertThat(result[0].amount).isEqualTo(100)
-        assertThat(result[1].amount).isEqualTo(10)
-    }
-
+ 
+    @Test 
+    fun `특정 유저의 id를 받으면 pointHistoryTable 에서 해당 유저의 포인트 사용 내역 리스트를 반환한다`() { 
+        val userId = 1L 
+        val histories = listOf( 
+            PointHistory(1, userId, TransactionType.CHARGE, 100, 0), 
+            PointHistory(2, userId, TransactionType.USE, 10, 0) 
+        ) 
+ 
+        `when`(pointHistoryTable.selectAllByUserId(userId)).thenReturn(histories) 
+        val result = pointRepositoryImpl.getUserPointHistories(userId) 
+ 
+        assertThat(result).hasSize(2) 
+        assertThat(result[0].amount).isEqualTo(100) 
+        assertThat(result[1].amount).isEqualTo(10) 
+    } 
+ 
     @Test
     fun `id, amount, totalPointsAfterCharge 를 전달 받고 테이블에서 포인트를 저장 후 저장 값을 반환해 준다`() {
         val userId = 1L

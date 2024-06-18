@@ -67,43 +67,43 @@ class PointControllerTest @Autowired constructor(
     }
 
 
-    @Nested
-    @DisplayName("[조회] 유저 포인트 사용 내역을 조회 컨트롤러 테스트")
-    inner class GetUserPointHistoriesControllerTests {
-        /**
-         * userId 를 받으면 해당 유저가 사용한 포인트 내역을 조회한다.
-         */
-        @Test
-        fun `getUserPointHistoryAPI Test 200 Ok`() {
-            val userId = 1L
-            val histories = listOf(
-                PointHistory(1, userId, TransactionType.CHARGE, 100, 0),
-                PointHistory(2, userId, TransactionType.USE, 10, 0)
-            )
-
-            given(pointService.getUserPointHistories(userId)).willReturn(histories)
-
-            mockMvc.perform(get("/point/{id}/histories", userId))
-                .andExpect(status().isOk)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].userId").value(userId))
-                .andExpect(jsonPath("$[0].type").value(TransactionType.CHARGE.toString()))
-                .andExpect(jsonPath("$[0].amount").value(100))
-        }
-
-        /**
-         * 유효하지 않은 Id가 들어오면 400 에러를 반환한다.
-         */
-        @Test
-        fun `getUserPointHistoryAPI Test 400 Bad Request`() {
-            val invalidUserId = "invalid"
-
-            mockMvc.perform(get("/point/{id}/histories", invalidUserId))
-                .andExpect(status().isBadRequest)
-        }
-    }
-
+    @Nested 
+    @DisplayName("[조회] 유저 포인트 사용 내역을 조회 컨트롤러 테스트") 
+    inner class GetUserPointHistoriesControllerTests { 
+        /** 
+         * userId 를 받으면 해당 유저가 사용한 포인트 내역을 조회한다. 
+         */ 
+        @Test 
+        fun `getUserPointHistoryAPI Test 200 Ok`() { 
+            val userId = 1L 
+            val histories = listOf( 
+                PointHistory(1, userId, TransactionType.CHARGE, 100, 0), 
+                PointHistory(2, userId, TransactionType.USE, 10, 0) 
+            ) 
+ 
+            given(pointService.getUserPointHistories(userId)).willReturn(histories) 
+ 
+            mockMvc.perform(get("/point/{id}/histories", userId)) 
+                .andExpect(status().isOk) 
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON)) 
+                .andExpect(jsonPath("$.length()").value(2)) 
+                .andExpect(jsonPath("$[0].userId").value(userId)) 
+                .andExpect(jsonPath("$[0].type").value(TransactionType.CHARGE.toString())) 
+                .andExpect(jsonPath("$[0].amount").value(100)) 
+        } 
+ 
+        /** 
+         * 유효하지 않은 Id가 들어오면 400 에러를 반환한다. 
+         */ 
+        @Test 
+        fun `getUserPointHistoryAPI Test 400 Bad Request`() { 
+            val invalidUserId = "invalid" 
+ 
+            mockMvc.perform(get("/point/{id}/histories", invalidUserId)) 
+                .andExpect(status().isBadRequest) 
+        } 
+    } 
+ 
     @Nested
     @DisplayName ("[저장] 유저 포인트 저장 컨트롤러 테스트")
     inner class ChargeUserPointControllerTests {

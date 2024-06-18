@@ -17,10 +17,10 @@ class PointRepositoryImpl(
     override fun findById(userId: Long): UserPoint {
         return userPointTable.selectById(userId)
     }
-
-    override fun getUserPointHistories(userId: Long): List<PointHistory> {
-        return pointHistoryTable.selectAllByUserId(userId)
-    }
+ 
+    override fun getUserPointHistories(userId: Long): List<PointHistory> { 
+        return pointHistoryTable.selectAllByUserId(userId) 
+    } 
 
     override fun chargeUserPoint(userId: Long, amount: Long, totalPointsAfterCharge : Long): UserPoint {
 //        savePointHistory(userId, amount, type = TransactionType.CHARGE)
