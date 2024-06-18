@@ -28,11 +28,11 @@ class PointService(
         validateSufficientPoints(currentUserPoint, amount)
         return updateUserPointForUse(userId, amount, currentUserPoint)
     }
-
-    fun getUserPointHistories(userId: Long): List<PointHistory> {
-        return point.getUserPointHistories(userId)
-    }
-
+ 
+    fun getUserPointHistories(userId: Long): List<PointHistory> { 
+        return point.getUserPointHistories(userId) 
+    } 
+ 
 
     private fun validateAmount(amount: Long) {
         if (amount <= 0) throw IllegalArgumentException("포인트는 0 이하일 수 없습니다")
