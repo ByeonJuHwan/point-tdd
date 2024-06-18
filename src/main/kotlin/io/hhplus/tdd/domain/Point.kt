@@ -20,8 +20,8 @@ class Point(
     fun chargePoint(userId: Long, amount: Long, totalPointsAfterCharge : Long): UserPoint {
         return pointRepository.chargeUserPoint(userId, amount, totalPointsAfterCharge)
     }
-
-    fun useUserPoint(userId: Long, amount : Long ,remainingPoints: Long): UserPoint {
-        return pointRepository.useUserPoint(userId, amount, remainingPoints)
-    }
+ 
+    fun useUserPoint(userId: Long, amount : Long ,remainingPoints: Long): UserPoint { 
+        return pointRepository.useUserPoint(userId, amount, remainingPoints) 
+    } 
 }

@@ -66,17 +66,17 @@ class PointTest {
         // then
         assertThat(result).isEqualTo(chargedUserPoint)
     }
-
-    @Test
-    fun `특정 유저의 사용할 포인트를 받아서 infra layer 로 전달하고 사용되고 남아있는 포인트를 받아온다`() {
-        val userId = 1L
-        val amount = 100L
-        val remainingPoints = 10L
-        val remainingUserPoints = UserPoint(id = userId, point = remainingPoints, updateMillis = System.currentTimeMillis())
-
-        `when`(pointRepository.useUserPoint(userId = userId, amount = amount, remainingPoints = remainingPoints)).thenReturn(remainingUserPoints)
-        val result = pointRepository.useUserPoint(userId, amount, remainingPoints)
-
-        assertThat(result).isEqualTo(remainingUserPoints)
-    }
+ 
+    @Test 
+    fun `특정 유저의 사용할 포인트를 받아서 infra layer 로 전달하고 사용되고 남아있는 포인트를 받아온다`() { 
+        val userId = 1L 
+        val amount = 100L 
+        val remainingPoints = 10L 
+        val remainingUserPoints = UserPoint(id = userId, point = remainingPoints, updateMillis = System.currentTimeMillis()) 
+ 
+        `when`(pointRepository.useUserPoint(userId = userId, amount = amount, remainingPoints = remainingPoints)).thenReturn(remainingUserPoints) 
+        val result = pointRepository.useUserPoint(userId, amount, remainingPoints) 
+ 
+        assertThat(result).isEqualTo(remainingUserPoints) 
+    } 
 }
