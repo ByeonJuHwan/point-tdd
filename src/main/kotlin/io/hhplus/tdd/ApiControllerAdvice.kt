@@ -23,13 +23,13 @@ class ApiControllerAdvice : ResponseEntityExceptionHandler() {
         )
     }
 
-    @ExceptionHandler(NotEnoughPointException::class)
-    fun handleIllegalArgumentException(e: NotEnoughPointException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(
-            ErrorResponse("400", e.message ?: "사용 가능한 포인트가 부족합니다"),
-            HttpStatus.BAD_REQUEST
-        )
-    }
+    @ExceptionHandler(NotEnoughPointException::class) 
+    fun handleIllegalArgumentException(e: NotEnoughPointException): ResponseEntity<ErrorResponse> { 
+        return ResponseEntity( 
+            ErrorResponse("400", e.message ?: "사용 가능한 포인트가 부족합니다"), 
+            HttpStatus.BAD_REQUEST 
+        ) 
+    } 
 
     @ExceptionHandler(Exception::class)
     fun handleException(e: Exception): ResponseEntity<ErrorResponse> {
