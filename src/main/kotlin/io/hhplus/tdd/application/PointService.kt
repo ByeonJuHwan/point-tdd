@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service
 @Service
 class PointService(
     private val point: Point,
-) {
-    fun getUserPointById(userId: Long) : UserPoint {
-        return point.getUserPointById(userId)
-    }
-
+) { 
+    fun getUserPointById(userId: Long) : UserPoint { 
+        return point.getUserPointById(userId) 
+    } 
+ 
     @Synchronized
     fun chargeUserPoint(userId: Long, amount: Long): UserPoint {
         validateAmount(amount)
