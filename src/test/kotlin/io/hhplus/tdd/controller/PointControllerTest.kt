@@ -155,53 +155,53 @@ class PointControllerTest @Autowired constructor(
     }
 
 
-    @Nested
-    @DisplayName ("[사용] 유저 포인트 사용 컨트롤러 테스트")
-    inner class useUserPointControllerTests {
-        /**
-         *  userId 와 amount (사용할 포인트양) 을 받으면 포인트를 감소시킨다.
-         */
-        @Test
-        fun `useUserPointAPI Test 200 ok`() {
-            val userId = 1L
-            val amount = 50L
-            val userPoint = UserPoint(userId, amount, System.currentTimeMillis())
-
-            given(pointService.useUserPoint(userId,amount)).willReturn(userPoint)
-
-            mockMvc.perform(patch("/point/{id}/use", userId)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(amount)))
-                .andExpect(status().isOk)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(userId))
-                .andExpect(jsonPath("$.point").value(amount))
-                .andExpect(jsonPath("$.updateMillis").value(userPoint.updateMillis))
-        }
-
-        /**
-         * 유효하지 않은 Id가 들어오면 400 에러를 반환한다.
-         */
-        @Test
-        fun `useUserPointAPI Test 400 Bad Request Bad Id`() {
-            val invalidUserId = "invalid"
-
-            mockMvc.perform(patch("/point/{id}/use", invalidUserId))
-                .andExpect(status().isBadRequest)
-        }
-
-        /**
-         * 유효하지 않은 amount 가 들어오면 400 에러를 반환한다.
-         */
-        @Test
-        fun `useUserPointAPI Test 400 Bad Request Bad amount`() {
-            val userId = 1L
-            val invalidAmount = "invalidAmount"
-
-            mockMvc.perform(patch("/point/{id}/use", userId)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(invalidAmount))
-            ).andExpect(status().isBadRequest)
-        }
-    }
+    @Nested 
+    @DisplayName ("[사용] 유저 포인트 사용 컨트롤러 테스트") 
+    inner class useUserPointControllerTests { 
+        /** 
+         *  userId 와 amount (사용할 포인트양) 을 받으면 포인트를 감소시킨다. 
+         */  
+        @Test 
+        fun `useUserPointAPI Test 200 ok`() { 
+            val userId = 1L 
+            val amount = 50L 
+            val userPoint = UserPoint(userId, amount, System.currentTimeMillis()) 
+ 
+            given(pointService.useUserPoint(userId,amount)).willReturn(userPoint) 
+ 
+            mockMvc.perform(patch("/point/{id}/use", userId) 
+                .contentType(MediaType.APPLICATION_JSON) 
+                .content(objectMapper.writeValueAsString(amount))) 
+                .andExpect(status().isOk) 
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON)) 
+                .andExpect(jsonPath("$.id").value(userId)) 
+                .andExpect(jsonPath("$.point").value(amount)) 
+                .andExpect(jsonPath("$.updateMillis").value(userPoint.updateMillis)) 
+        } 
+ 
+        /** 
+         * 유효하지 않은 Id가 들어오면 400 에러를 반환한다. 
+         */ 
+        @Test 
+        fun `useUserPointAPI Test 400 Bad Request Bad Id`() { 
+            val invalidUserId = "invalid" 
+ 
+            mockMvc.perform(patch("/point/{id}/use", invalidUserId)) 
+                .andExpect(status().isBadRequest) 
+        } 
+ 
+        /** 
+         * 유효하지 않은 amount 가 들어오면 400 에러를 반환한다. 
+         */ 
+        @Test 
+        fun `useUserPointAPI Test 400 Bad Request Bad amount`() { 
+            val userId = 1L 
+            val invalidAmount = "invalidAmount" 
+ 
+            mockMvc.perform(patch("/point/{id}/use", userId) 
+                .contentType(MediaType.APPLICATION_JSON) 
+                .content(objectMapper.writeValueAsString(invalidAmount)) 
+            ).andExpect(status().isBadRequest) 
+        } 
+    } 
 }
