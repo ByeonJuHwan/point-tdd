@@ -24,16 +24,16 @@ class PointTest {
     @Mock
     lateinit var pointRepository: PointRepository
 
-    @Test
-    fun `특정 유저의 id를 받아서 infra layer 로 부터 현재 유저의 포인트를 받아온다`() {
-        val userId = 1L
-        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis())
-
-        `when`(pointRepository.findById(userId)).thenReturn(userPoint)
-        val result = point.getUserPointById(userId)
-
-        assertThat(result).isEqualTo(userPoint)
-    }
+    @Test 
+    fun `특정 유저의 id를 받아서 infra layer 로 부터 현재 유저의 포인트를 받아온다`() { 
+        val userId = 1L 
+        val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis()) 
+ 
+        `when`(pointRepository.findById(userId)).thenReturn(userPoint) 
+        val result = point.getUserPointById(userId) 
+ 
+        assertThat(result).isEqualTo(userPoint) 
+    } 
 
     @Test
     fun `특정 유저의 id를 받아서 infra layer 로 부터 유저의 포인트 사용 내역을 받아온다`() {

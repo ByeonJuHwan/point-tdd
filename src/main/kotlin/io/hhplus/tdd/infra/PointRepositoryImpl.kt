@@ -13,11 +13,11 @@ class PointRepositoryImpl(
     private val pointHistoryTable: PointHistoryTable,
     private val pointHistoryStorage: PointHistoryStorage,
 ) : PointRepository {
-
-    override fun findById(userId: Long): UserPoint {
-        return userPointTable.selectById(userId)
-    }
-
+ 
+    override fun findById(userId: Long): UserPoint { 
+        return userPointTable.selectById(userId) 
+    } 
+ 
     override fun getUserPointHistories(userId: Long): List<PointHistory> {
         return pointHistoryTable.selectAllByUserId(userId)
     }

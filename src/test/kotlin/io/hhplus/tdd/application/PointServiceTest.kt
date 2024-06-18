@@ -29,27 +29,27 @@ class PointServiceTest {
     lateinit var point: Point
 
 
-    /**
-     * 사용자의 포인트 데이터를 domain layer 에서 받아온다.
-     */
-    @Nested
-    @DisplayName("[조회] 회원별 포인트 조회 서비스")
-    inner class GetUserPointTests {
-
-        @Test
-        fun `사용자의 포인트 데이터를 domain layer 에서 받아온다`() {
-            // given
-            val userId = 1L
-            val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis())
-
-            // when
-            `when`(point.getUserPointById(userId)).thenReturn(userPoint)
-            val result = pointService.getUserPointById(userId)
-
-            // then
-            assertThat(result).isEqualTo(userPoint)
-        }
-    }
+    /** 
+     * 사용자의 포인트 데이터를 domain layer 에서 받아온다. 
+     */ 
+    @Nested 
+    @DisplayName("[조회] 회원별 포인트 조회 서비스") 
+    inner class GetUserPointTests { 
+ 
+        @Test 
+        fun `사용자의 포인트 데이터를 domain layer 에서 받아온다`() { 
+            // given 
+            val userId = 1L 
+            val userPoint = UserPoint(id = userId, point = 100, updateMillis = System.currentTimeMillis()) 
+ 
+            // when 
+            `when`(point.getUserPointById(userId)).thenReturn(userPoint) 
+            val result = pointService.getUserPointById(userId) 
+ 
+            // then 
+            assertThat(result).isEqualTo(userPoint) 
+        } 
+    } 
 
     @Nested
     @DisplayName("[저장] 회원별 포인트 저장 서비스")
