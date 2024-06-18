@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service
 @Service
 class Point(
     private val pointRepository: PointRepository,
-) {
-    fun getUserPointById(userId: Long): UserPoint{
-        return pointRepository.findById(userId)
-    }
-
+) { 
+    fun getUserPointById(userId: Long): UserPoint{ 
+        return pointRepository.findById(userId) 
+    } 
+ 
     fun getUserPointHistories(userId: Long): List<PointHistory> {
         return pointRepository.getUserPointHistories(userId)
     }
