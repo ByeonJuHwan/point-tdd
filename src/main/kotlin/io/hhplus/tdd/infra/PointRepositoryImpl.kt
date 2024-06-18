@@ -27,19 +27,19 @@ class PointRepositoryImpl(
         pointHistoryStorage.savePointHistory(userId, amount, type = TransactionType.CHARGE)
         return userPointTable.insertOrUpdate(id = userId, amount = totalPointsAfterCharge)
     }
-
-    override fun useUserPoint(userId: Long, amount: Long, remainingPoints : Long): UserPoint {
-//        savePointHistory(userId, amount, type = TransactionType.USE)
-        pointHistoryStorage.savePointHistory(userId, amount, type = TransactionType.USE)
-        return userPointTable.insertOrUpdate(userId, remainingPoints)
-    }
-
-    private fun savePointHistory(userId: Long, amount: Long, type : TransactionType) {
-        pointHistoryTable.insert(
-            id = userId,
-            amount = amount,
-            transactionType = type,
-            updateMillis = System.currentTimeMillis()
-        )
-    }
+ 
+    override fun useUserPoint(userId: Long, amount: Long, remainingPoints : Long): UserPoint { 
+//        savePointHistory(userId, amount, type = TransactionType.USE) 
+        pointHistoryStorage.savePointHistory(userId, amount, type = TransactionType.USE) 
+        return userPointTable.insertOrUpdate(userId, remainingPoints) 
+    } 
+ 
+    private fun savePointHistory(userId: Long, amount: Long, type : TransactionType) { 
+        pointHistoryTable.insert( 
+            id = userId, 
+            amount = amount, 
+            transactionType = type, 
+            updateMillis = System.currentTimeMillis() 
+        ) 
+    } 
 }
