@@ -52,16 +52,16 @@ class PointIntegrationTest {
         executeService.submit { 
             try { 
                 pointService.chargeUserPoint(userId, 50) 
-                Thread.sleep(5000) 
-            } finally { 
+            } finally {
                 latch.countDown() 
             } 
         } 
  
         // 포인트 사용 쓰레드 
         executeService.submit { 
-            try { 
-                pointService.useUserPoint(userId, 10) 
+            try {
+//                Thread.sleep(100)
+                pointService.useUserPoint(userId, 10)
             } catch (e: IllegalArgumentException) { 
                 logger.error(e.message) 
             } finally { 
@@ -118,5 +118,46 @@ class PointIntegrationTest {
         val result = pointService.getUserPointById(userId) 
         assertThat(result.point).isEqualTo(80) 
  
-    } 
+    }
+
+
+
+    @Test
+    fun `동시에 저장과 사용 요청이 10번씩 눌렀을때 ReentrantLock 로 동시성 이슈를 해결한다1`() {
+        val userId = 1L
+
+        val threadCount = 10 // 더 많은 스레드 사용
+        val executeService = Executors.newFixedThreadPool(threadCount)
+        val latch = CountDownLatch(threadCount)
+
+        for (i in 0 until threadCount) {
+            if (i % 2 == 0) {
+                // 포인트 저장 쓰레드
+                executeService.submit {
+                    try {
+                        pointService.chargeUserPoint(userId, 50)
+                    } finally {
+                        latch.countDown()
+                    }
+                }
+            } else {
+                // 포인트 사용 쓰레드
+                executeService.submit {
+                    try {
+                        pointService.useUserPoint(userId, 10)
+                    } catch (e: IllegalArgumentException) {
+                        logger.error(e.message)
+                    } finally {
+                        latch.countDown()
+                    }
+                }
+            }
+        }
+
+        latch.await()
+        executeService.shutdown()
+
+        val result = pointService.getUserPointById(userId)
+        assertThat(result.point).isEqualTo(200)
+    }
 } 
