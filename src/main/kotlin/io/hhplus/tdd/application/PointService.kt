@@ -9,24 +9,39 @@ import org.springframework.stereotype.Service
 @Service
 class PointService(
     private val point: Point,
+    private val lockProvider: LockProvider,
 ) {
     fun getUserPointById(userId: Long) : UserPoint {
         return point.getUserPointById(userId)
     }
 
-    @Synchronized 
-    fun chargeUserPoint(userId: Long, amount: Long): UserPoint { 
-        validateAmount(amount) 
-        val currentUserPoint = getUserPointById(userId) 
-        return updateUserPointForCharge(userId, amount, currentUserPoint) 
-    } 
+//    @Synchronized
+    fun chargeUserPoint(userId: Long, amount: Long): UserPoint {
+        val lock = lockProvider.getLock(userId)
+
+        lock.lock()
+        try {
+            validateAmount(amount)
+            val currentUserPoint = getUserPointById(userId)
+            return updateUserPointForCharge(userId, amount, currentUserPoint)
+        } finally {
+            lock.unlock()
+        }
+    }
  
-    @Synchronized 
-    fun useUserPoint(userId: Long, amount: Long): UserPoint { 
-        validateAmount(amount) 
-        val currentUserPoint = getUserPointById(userId) 
-        validateSufficientPoints(currentUserPoint, amount) 
-        return updateUserPointForUse(userId, amount, currentUserPoint) 
+//    @Synchronized
+    fun useUserPoint(userId: Long, amount: Long): UserPoint {
+        val lock = lockProvider.getLock(userId)
+
+        lock.lock()
+        try {
+            validateAmount(amount)
+            val currentUserPoint = getUserPointById(userId)
+            validateSufficientPoints(currentUserPoint, amount)
+            return updateUserPointForUse(userId, amount, currentUserPoint)
+        } finally {
+            lock.unlock()
+        }
     } 
 
     fun getUserPointHistories(userId: Long): List<PointHistory> {
