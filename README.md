@@ -29,8 +29,8 @@
 하지만 다른 스레드들이 대기는 하고 있지만 기존에 작업 중이던 스레드의 작업이 끝난다고 해서 대기 중인 작업이
 반드시 순서대로 실행되지는 않습니다.
 
-정리하자면 `@Synchronized`는 동시성에 대한 처리는 가능하지만 순서 보장이 되지 않습니다. 
-따라서 순서 보장이 반드시 필요한 작업이라면 다른 방법을 고려해 봐야합니다.
+**정리하자면 `@Synchronized`는 동시성에 대한 처리는 가능하지만 순서 보장이 되지 않습니다. 
+따라서 순서 보장이 반드시 필요한 작업이라면 다른 방법을 고려해 봐야합니다.**
 
 #### 2. `ReentrantLock` 
 
@@ -50,6 +50,6 @@ fun getLock(key: Long): ReentrantLock = lockMap.computeIfAbsent(key) { Reentrant
 
 ![](https://velog.velcdn.com/images/asdcz11/post/5aa20c9e-7ec4-4383-8c17-884852aaafee/image.png)
 
-정리하자면 동시성 이슈를 해결함과 동시에 순서 보장이 필요한 로직이라면 ReentrantLock을 고려해 볼 수 있습니다.
+**정리하자면 동시성 이슈를 해결함과 동시에 순서 보장이 필요한 로직이라면 ReentrantLock을 고려해 볼 수 있습니다.
 다만, lock()과 unlock() 메서드를 반드시 쌍으로 사용해야 데드락과 같은 문제를 방지할 수 있습니다.
-일반적으로 try-finally 블록을 사용하여 안전하게 락을 해제합니다.
+일반적으로 try-finally 블록을 사용하여 안전하게 락을 해제합니다.**
